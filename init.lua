@@ -50,7 +50,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 
-vim.cmd([[ autocmd VimEnter * cd C:\\Users\\charles.porter\\source]])
+--vim.cmd([[ autocmd VimEnter * cd C:\\Users\\charles.porter\\source]])
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -101,6 +101,24 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+    { 'tpope/vim-dadbod', lazy = true },
+    { 'neoclide/coc.nvim', branch ='release'},
+    { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+  },
+  cmd = {
+    'DBUI',
+    'DBUIToggle',
+    'DBUIAddConnection',
+    'DBUIFindBuffer',
+  },
+  init = function()
+    -- Your DBUI configuration
+    vim.g.db_ui_use_nerd_fonts = 1
+  end,
+},
   {
     "nvim-tree/nvim-tree.lua",
     keys = {
@@ -210,6 +228,7 @@ require('lazy').setup({
       -- requirements installed.
       {
         'nvim-telescope/telescope-fzf-native.nvim',
+        'nvim-telescope/telescope-live-grep-args.nvim',
         -- NOTE: If you are having trouble with this installation,
         --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
@@ -228,7 +247,6 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
